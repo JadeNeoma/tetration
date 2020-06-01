@@ -6,8 +6,9 @@ import argparse
 from varname import nameof
 
 
-def find_k(y, x):
-    print("Not implemented")
+def find_k(y, x):  # as yet not finished so don't use
+    print("Not implemented, Don't use")
+    return None
 
 
 def calc_x(y, k):  # calculates x given y and k, linear search up from 1 to 5 and from -1 to -5
@@ -37,32 +38,41 @@ def calc_y(x, k):  # calculate y = x|k
 
 
 def console_converter(default, name, needed):
-    if needed:
+    if needed:  # get value from user, assuming it hasn't already been given
         assign = int(input("Please enter " + name + ": "))
         return assign
-    else:
+    else:  # if user has already provided value in command line
         return default
 
 
 def calc(p, q):
-    return calc_y(p, q)
+    return calc_y(p, q)  # used to set calc() to default to calc_y()
 
 
 def main():
+    # parse all command line variables
     parser = argparse.ArgumentParser()
     parser.add_argument("num1", type=int, nargs='?', const=0)
     parser.add_argument("num2", type=int, nargs='?', const=0)
     parser.add_argument('-x', '--calculate_x', action='store_true', help="allows finding of x")
     parser.add_argument('-y', '--calculate_y', action='store_true', help="allows finding of x")
     args = parser.parse_args()
+
+    # find out if variables are needed from the user, its all or nothing btw
     needed = args.num2 is None
+
+    # get option from user if needed
     m = console_converter(0, "\n0 to calculate y given x & k\n1 to calculate x given y & k\n", needed)
-    if args.calculate_x or m == 1:
+
+    # calculate various values give options, getting user input if needed
+    if args.calculate_x or m == 1:  # if option = 1
         out = calc_x(console_converter(args.num1, "y", needed), console_converter(args.num2, "k", needed))
-    elif args.calculate_y or m == 0:
+    elif args.calculate_y or m == 0:  # if option = 0
         out = calc_y(console_converter(args.num1, "x", needed), console_converter(args.num2, "k", needed))
-    else:
+    else:  # defaults to option = 0, included twice for completeness
         out = calc(console_converter(args.num1, "x", needed), console_converter(args.num2, "k", needed))
+
+    # print the answer
     print(out)
 
 

@@ -6,7 +6,7 @@ This is done in a way that isn't packaged but can be easily imported into other 
 ### Imported:
 * tetration.calc(x, k) is the same as tetration.calc_y(x, k)
 * tetration.calc_y(x, k) returns y
-* tetration.calc_x(y, k) returns x, tests between -5 and 5, excl. 0
+* tetration.calc_x(y, k) returns x, tests between -5 and 5, excl. 0, returns None if not found
 
 ### Run from console:
 * Self-Explanatory, option 1 tests between -5 and 5 excl. 0
